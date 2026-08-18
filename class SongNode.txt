@@ -1,0 +1,59 @@
+class SongNode:
+    def __init__(self, title, artist):
+        self.title = title
+        self.artist = artist
+        self.prev = None
+        self.next = None
+
+
+class Playlist:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def add_song(self, title, artist):
+        new = SongNode(title, artist)
+
+        if self.head is None:
+            self.head = self.tail = new
+        else:
+            new.prev = self.tail
+            self.tail.next = new
+            self.tail = new
+
+    def display(self):
+        cur = self.head
+
+        while cur:
+            print(cur.title, "-", cur.artist)
+            cur = cur.next
+
+
+def search_song(self, title):
+    cur = self.head
+
+    while cur:
+        if cur.title.lower() == title.lower():
+            return cur
+        cur = cur.next
+
+    return None
+
+
+def delete_song(self, title):
+    node = self.search_song(title)
+
+    if node is None:
+        return False
+
+    if node.prev:
+        node.prev.next = node.next
+    else:
+        self.head = node.next
+
+    if node.next:
+        node.next.prev = node.prev
+    else:
+        self.tail = node.prev
+
+    return True
